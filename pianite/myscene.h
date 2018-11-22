@@ -11,7 +11,7 @@
 
 #include <rt2d/scene.h>
 
-#include "myentity.h"
+#include "pokemon.h"
 
 /// @brief The MyScene class is the Scene implementation.
 class MyScene : public Scene
@@ -29,15 +29,9 @@ public:
 
 private:
 	/// @brief the rotating square in the middle of the screen
-	MyEntity* myentity;
+	Pokemon* absol;
 	/// @brief a Timer to rotate the color every n seconds
 	Timer t;
-
-private:
-
-	MyEntity* myentity2;
-
-	Timer tt;
 };
 
 #endif /* SCENE00_H */

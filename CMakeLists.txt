@@ -13,6 +13,7 @@ OPTION(MAKE_NOISE "Make Perlin Noise application" ON)
 OPTION(MAKE_GEOMETRIC "Make GeoMetric application" ON)
 OPTION(MAKE_SHADY "Make custom Shader application" ON)
 OPTION(MAKE_WOLFENSTEIN "Make Wolfenstein3D raycasting application" ON)
+OPTION(MAKE_PAINITE "Make diamond application" ON)
 
 OPTION(USE_RS232 "Use RS232 library" OFF)
 OPTION(MAKE_SERIAL "Make serial application" OFF)
@@ -146,20 +147,20 @@ file(
 ####################################################################
 # start                                                            #
 ####################################################################
-IF(MAKE_START)
-	add_executable(start
-		start/main.cpp
-		start/myentity.cpp
-		start/myentity.h
-		start/myscene.cpp
-		start/myscene.h
+IF(MAKE_PAINITE)
+	add_executable(painite
+		painite/main.cpp
+		painite/myentity.cpp
+		painite/myentity.h
+		painite/myscene.cpp
+		painite/myscene.h
 	)
-	target_link_libraries(start
+	target_link_libraries(painite
 		${ALL_GRAPHICS_LIBS}
 	)
 	# Copy assets to the build directory
 	file(
-		COPY start/assets
+		COPY painite/assets
 		DESTINATION ${CMAKE_BINARY_DIR}
 	)
 ENDIF()
