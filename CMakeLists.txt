@@ -150,10 +150,12 @@ file(
 IF(MAKE_PAINITE)
 	add_executable(painite
 		painite/main.cpp
-		painite/myentity.cpp
-		painite/myentity.h
+		painite/pokemon.cpp
+		painite/pokemon.h
 		painite/myscene.cpp
 		painite/myscene.h
+		painite/absol.cpp
+		painite/absol.h
 	)
 	target_link_libraries(painite
 		${ALL_GRAPHICS_LIBS}

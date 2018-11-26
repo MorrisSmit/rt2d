@@ -8,6 +8,7 @@
 #include <sstream>
 
 #include "myscene.h"
+#include "absol.h"
 
 MyScene::MyScene() : Scene()
 {
@@ -15,9 +16,9 @@ MyScene::MyScene() : Scene()
 	t.start();
 
 	// create a single instance of MyEntity in the middle of the screen.
-	// the Sprite is added in Constructor of MyEntity.
-	absol = new Pokemon();
-	absol->position = Point2(SWIDTH/2, SHEIGHT/2);
+	// the Sprite added in Constructor of MyEntity.
+	absol = new Absol();
+	absol->position = Point2(250, 500);
 	absol->scale = Point(4.0f, 4.0f);
 	// create the scene 'tree'
 	// add myentity to this Scene as a child.

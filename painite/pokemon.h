@@ -29,6 +29,7 @@ public:
 
 private:
 	/* add your private declarations */
+	std::vector<int> moveset;
 };
 
 #endif /* POKEMON_H */

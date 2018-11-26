@@ -3,12 +3,13 @@
  *
  * Copyright 2015 Your Name <you@yourhost.com>
  */
-
 #include "pokemon.h"
+#include <vector>
+
 
 Pokemon::Pokemon() : Entity()
 {
-	this->addSprite("assets/absol.tga");
+	
 }
 
 Pokemon::~Pokemon()
