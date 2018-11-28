@@ -1,9 +1,9 @@
 /**
 * Copyright 2015 Your Name <you@yourhost.com>
 *
-* @file pokemon.h
+* @file absol.h
 *
-* @brief description of Pokemon behavior.
+* @brief description of Absol behavior.
 */
 
 #ifndef ABSOL_H
@@ -20,14 +20,17 @@ public:
 	/// @brief Destructor
 	virtual ~Absol();
 
-	/// @brief update is automatically called every frame
-	/// @param deltaTime the elapsed time in seconds
-	/// @return void
-	void update(float deltaTime);
+	void takeDamage(int amount);
 
 
 private:
-	/* add your private declarations */
+
+	std::vector<Move> moveset;
+	int health;
+	std::string name;
+	std::string type;
+	//Move tackle;
+
 };
 
 #endif /* ABSOL_H */

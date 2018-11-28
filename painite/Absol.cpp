@@ -4,7 +4,11 @@
 
 Absol::Absol() : Pokemon()
 {
-	this->addSprite("assets/absol_back.tga");
+	moveset;
+	health = 20;
+	name = "Absol";
+	type = "dark";
+	//tackle = new Move(10, 30, "tackle");
 }
 
 
@@ -13,9 +17,11 @@ Absol::~Absol()
 
 }
 
-void Absol::update(float deltaTime)
-{
 
+void Absol::takeDamage(int amount)
+{
+	this->health -= amount;
+	
 }
 
 

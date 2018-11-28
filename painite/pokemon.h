@@ -10,6 +10,8 @@
 #define POKEMON_H
 
 #include <rt2d/entity.h>
+#include "move.h";
+#include <vector>
 
 /// @brief The MyEntity class is the Entity implementation.
 class Pokemon : public Entity
@@ -20,16 +22,16 @@ public:
 	/// @brief Destructor
 	virtual ~Pokemon();
 
-	/// @brief update is automatically called every frame
-	/// @param deltaTime the elapsed time in seconds
-	/// @return void
-	virtual void update(float deltaTime);
 
-	void moveLeft();
+	void Pokemon::update(float deltaTime);
+	void takeDamage(int amount);
 
 private:
 	/* add your private declarations */
-	std::vector<int> moveset;
+	std::vector<Move> moveset;
+	int health;
+	std::string name;
+	std::string type;
 };
 
 #endif /* POKEMON_H */
