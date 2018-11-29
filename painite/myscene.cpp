@@ -14,20 +14,20 @@ MyScene::MyScene() : Scene()
 {
 	// start the timer.
 	t.start();
-
+	allyposition *= (250, 500);
+	enemyposition *= (500, 250);
 	// create a single instance of absol in the middle of the screen.
 	// the Sprite added in Constructor of absol.
 	absol = new Absol();
-	absol->position = Point2(250, 500);
-	absol->scale = Point(4.0f, 4.0f);
-	absol->addSprite("assets/absol_back.tga");
+	absol->position = allyposition;
+	
 	// create the scene 'tree'
 	// add myentity to this Scene as a child.
 	this->addChild(absol);
 
 	absol2 = new Absol();
-	absol2->position = Point2(500, 250);
-	absol2->scale = Point(4.0f, 4.0f);
+	absol2->position = enemyposition;
+	
 	absol2->addSprite("assets/absol_front.tga");
 	this->addChild(absol2);
 
@@ -56,8 +56,8 @@ void MyScene::update(float deltaTime)
 		this->stop();
 	}
 	if (input()->getKeyUp(KeyCode::Up)) {
-		absol->takeDamage(10);
-		std::cout << "123" << std::endl;
+		absol->takeDamage(1);
+		std::cout << "absol took damage! remaining health: " <<absol->gethealth() << std::endl;
 	}
 
 	

@@ -145,7 +145,7 @@ file(
 )
 
 ####################################################################
-# start                                                            #
+# painite                                                            #
 ####################################################################
 IF(MAKE_PAINITE)
 	add_executable(painite
@@ -156,6 +156,8 @@ IF(MAKE_PAINITE)
 		painite/myscene.h
 		painite/absol.cpp
 		painite/absol.h
+		painite/move.cpp
+		painite/move.h
 	)
 	target_link_libraries(painite
 		${ALL_GRAPHICS_LIBS}

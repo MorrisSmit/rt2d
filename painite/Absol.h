@@ -20,16 +20,9 @@ public:
 	/// @brief Destructor
 	virtual ~Absol();
 
-	void takeDamage(int amount);
-
 
 private:
 
-	std::vector<Move> moveset;
-	int health;
-	std::string name;
-	std::string type;
-	//Move tackle;
 
 };
 

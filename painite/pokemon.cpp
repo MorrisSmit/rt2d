@@ -9,9 +9,10 @@
 
 Pokemon::Pokemon() : Entity()
 {
-	health = 0;
+	_health = 100;
 	type = "normal";
 	name = "unknown";
+	tackle = new Move(30, 20, "tackle");
 
 }
 
@@ -25,7 +26,12 @@ void Pokemon::update(float deltaTime)
 	
 }
 
-void Pokemon::takeDamage(int amount) 
+void Pokemon::takeDamage(int amount)
 {
-	this->health -= amount;
+	this->_health -= amount;
+}
+
+int Pokemon::gethealth()
+{
+	return _health;
 }

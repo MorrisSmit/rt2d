@@ -17,7 +17,7 @@ class Move : public Entity
 {
 public:
 	/// @brief Constructor
-	Move(int pp, int power, std::string name);
+	Move(int _power, int _pp, std::string _name);
 	/// @brief Destructor
 	virtual ~Move();
 

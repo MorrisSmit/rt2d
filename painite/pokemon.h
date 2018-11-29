@@ -25,13 +25,18 @@ public:
 
 	void Pokemon::update(float deltaTime);
 	void takeDamage(int amount);
+	int gethealth();
+
+protected:
+	int _health;
+	std::vector<Move> moveset;
+	std::string name;
+	std::string type;
+	Move* tackle;
 
 private:
 	/* add your private declarations */
-	std::vector<Move> moveset;
-	int health;
-	std::string name;
-	std::string type;
+
 };
 
 #endif /* POKEMON_H */

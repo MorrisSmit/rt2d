@@ -33,6 +33,8 @@ private:
 	Pokemon* absol2;
 	/// @brief a Timer to rotate the color every n seconds
 	Timer t;
+	Point allyposition;
+	Point enemyposition;
 };
 
 #endif /* SCENE00_H */
