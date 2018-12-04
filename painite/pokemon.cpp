@@ -35,6 +35,7 @@ void Pokemon::takeDamage(int amount)
 	if ((this->health - amount) <= 0) 
 	{
 		this->addSprite("assets/square.tga");
+		this->health -= amount;
 	}
 	else {
 		this->health -= amount;

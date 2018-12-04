@@ -13,7 +13,7 @@
 #include "move.h";
 #include <vector>
 
-/// @brief The MyEntity class is the Entity implementation.
+/// @brief The Pokemon class is the Entity implementation.
 class Pokemon : public Entity
 {
 public:
@@ -28,6 +28,7 @@ public:
 	int getHealth();
 	void attack(Pokemon *p);
 	std::string getName();
+	bool isAlive();
 
 protected:
 	int health;
@@ -35,10 +36,8 @@ protected:
 	std::string name;
 	std::string type;
 	Move* tackle;
-	bool isAlive();
 
 private:
-	/* add your private declarations */
 
 };
 

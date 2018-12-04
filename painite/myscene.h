@@ -47,6 +47,9 @@ private:
 
 	std::vector<Pokemon*> playerTeam;
 	std::vector<Pokemon*> computerTeam;
+
+	Pokemon* currentAllyPokemon;
+	Pokemon* currentEnemyPokemon;
 };
 
 #endif /* MYSCENE_H */

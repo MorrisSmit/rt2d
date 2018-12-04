@@ -7,8 +7,6 @@
 #include <fstream>
 #include <sstream>
 #include <cstdlib>
-#include <random>
-
 
 #include "myscene.h"
 #include "absol.h"
@@ -16,31 +14,22 @@
 
 MyScene::MyScene() : Scene()
 {
-
-	
 	// start the timer.
 	t.start();
 	allyposition = Point(250, 500);
 	enemyposition = Point(500, 250);
-	
 
+	currentEnemyPokemon = nullptr;
+	currentAllyPokemon = nullptr;
+	
 
 	makePokemon();
-	
-	
 
-
-
-
-
-	
-	
-	//absol2->addSprite("assets/absol_front.tga");
 	std::cout << "which pokemon would u like to send out first? " << std::endl;
 	std::cout << "press A for absol " << std::endl;
 	std::cout << "press S for blastoise " << std::endl;
 
-	std::cout << "main\n";
+	//std::cout << "main\n";
 	
 }
 
@@ -65,23 +54,29 @@ void MyScene::update(float deltaTime)
 	// ###############################################################
 	// Escape key stops the Scene
 	// ###############################################################
-	if (input()->getKeyUp(KeyCode::Escape)) {
+	if (input()->getKeyUp(KeyCode::Escape)) 
+	{
 		this->stop();
 	}
-	if (input()->getKeyUp(KeyCode::Up)) {
-		absol->attack(absol2);
-		std::cout << absol2->getName() <<"took damage! remaining health: " <<absol2->gethealth() << std::endl;
+	if (input()->getKeyUp(KeyCode::Up) && currentAllyPokemon != nullptr && currentEnemyPokemon->isAlive())
+	{
+		currentAllyPokemon->attack(currentEnemyPokemon);
+		std::cout << currentEnemyPokemon->getName() <<" took damage! remaining health: " <<currentEnemyPokemon->getHealth() << std::endl;
 	}
-	if (input()->getKeyUp(KeyCode::A)) {
+	if (input()->getKeyUp(KeyCode::A) && currentAllyPokemon == nullptr)
+	{
 		std::cout << "you sent out " << absol->getName()<< "!" << std::endl;
-		this->addChild(absol);
+		this->addChild(playerTeam[0]);
 		absol->position = allyposition;
+		currentAllyPokemon = playerTeam[0];
 		computerChoice();
 	}
-	if (input()->getKeyUp(KeyCode::S)) {
-		std::cout << "you sent out "<< blastoise->getName() << "!"  <<  std::endl;
-		this->addChild(blastoise);
+	if (input()->getKeyUp(KeyCode::S) && currentAllyPokemon == nullptr)
+	{
+ 		std::cout << "you sent out "<< blastoise->getName() << "!"  <<  std::endl;
+		this->addChild(playerTeam[1]);
 		blastoise->position = allyposition;
+		currentAllyPokemon = playerTeam[1];
 		computerChoice();
 	}
 
@@ -108,12 +103,14 @@ void MyScene::computerChoice()
 	{
 		std::cout << "The enemy sent out Absol!" << std::endl;
 		this->addChild(computerTeam[0]);
+		currentEnemyPokemon = computerTeam[0];
 		computerTeam[0]->position = enemyposition;
 	}
 	else 
 	{
 		std::cout << "The enemy sent out Blastoise!" << std::endl;
 		this->addChild(computerTeam[1]);
+		currentEnemyPokemon = computerTeam[1];
 		computerTeam[1]->position = enemyposition;
 	}
 }
