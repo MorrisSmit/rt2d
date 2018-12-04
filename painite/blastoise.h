@@ -6,24 +6,24 @@
 * @brief description of Absol behavior.
 */
 
-#ifndef ABSOL_H
-#define ABSOL_H
+#ifndef BLASTOISE_H
+#define BLASTOISE_H
 
 #include "pokemon.h"
 
 /// @brief The MyEntity class is the Entity implementation.
-class Absol : public Pokemon
+class Blastoise : public Pokemon
 {
 public:
 	/// @brief Constructor
-	Absol(int side);
+	Blastoise(int side);
 	/// @brief Destructor
-	virtual ~Absol();
+	virtual ~Blastoise();
 
 
 private:
-	Absol();
+	Blastoise();
 
 };
 
-#endif /* ABSOL_H */
+#endif /* BLASTOISE_H */

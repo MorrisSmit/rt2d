@@ -1,0 +1,25 @@
+#include "blastoise.h"
+
+
+
+Blastoise::Blastoise(int side) : Pokemon()
+{
+	this->scale = Point(4.0f, 4.0f);
+	name = "Blastoise";
+	type = "dark";
+	if (side == 1)
+	{
+		this->addSprite("assets/blastoise_front.tga");
+	}
+	else
+	{
+		this->addSprite("assets/blastoise_back.tga");
+	}
+}
+
+
+Blastoise::~Blastoise()
+{
+
+}
+

@@ -11,6 +11,7 @@
 
 #include <rt2d/scene.h>
 
+
 #include "pokemon.h"
 
 /// @brief The MyScene class is the Scene implementation.
@@ -21,6 +22,8 @@ public:
 	MyScene();
 	/// @brief Destructor
 	virtual ~MyScene();
+	void makePokemon();
+	void computerChoice();
 
 	/// @brief update is automatically called every frame
 	/// @param deltaTime the elapsed time in seconds
@@ -30,11 +33,20 @@ public:
 private:
 	/// @brief the rotating square in the middle of the screen
 	Pokemon* absol;
+	Pokemon* blastoise;
+	
 	Pokemon* absol2;
+	Pokemon* blastoise2;
+
+	int randNum;
+
 	/// @brief a Timer to rotate the color every n seconds
 	Timer t;
 	Point allyposition;
 	Point enemyposition;
+
+	std::vector<Pokemon*> playerTeam;
+	std::vector<Pokemon*> computerTeam;
 };
 
-#endif /* SCENE00_H */
+#endif /* MYSCENE_H */

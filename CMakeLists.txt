@@ -158,6 +158,8 @@ IF(MAKE_PAINITE)
 		painite/absol.h
 		painite/move.cpp
 		painite/move.h
+		painite/blastoise.cpp
+		painite/blastoise.h
 	)
 	target_link_libraries(painite
 		${ALL_GRAPHICS_LIBS}

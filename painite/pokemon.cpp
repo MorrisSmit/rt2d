@@ -7,13 +7,12 @@
 #include <vector>
 
 
-Pokemon::Pokemon() : Entity()
+ Pokemon::Pokemon() : Entity()
 {
-	_health = 100;
+	health = 100;
 	type = "normal";
 	name = "unknown";
 	tackle = new Move(30, 20, "tackle");
-
 }
 
 Pokemon::~Pokemon()
@@ -26,12 +25,41 @@ void Pokemon::update(float deltaTime)
 	
 }
 
-void Pokemon::takeDamage(int amount)
+void Pokemon::attack(Pokemon* p) 
 {
-	this->_health -= amount;
+	p->takeDamage(20);
 }
 
-int Pokemon::gethealth()
+void Pokemon::takeDamage(int amount)
 {
-	return _health;
+	if ((this->health - amount) <= 0) 
+	{
+		this->addSprite("assets/square.tga");
+	}
+	else {
+		this->health -= amount;
+	}
+	
+}
+
+int Pokemon::getHealth()
+{
+	return health;
+}
+
+std::string Pokemon::getName() 
+{
+	return name;
+}
+
+bool Pokemon::isAlive() 
+{
+	if (this->health <= 0)
+	{
+		return false;
+	}
+	else 
+	{
+		return true;
+	}
 }
