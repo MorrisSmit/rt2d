@@ -23,7 +23,8 @@ public:
 	/// @brief Destructor
 	virtual ~MyScene();
 	void makePokemon();
-	void computerChoice();
+	void computerStart();
+	void computerSwitch();
 
 	/// @brief update is automatically called every frame
 	/// @param deltaTime the elapsed time in seconds

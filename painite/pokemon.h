@@ -10,7 +10,7 @@
 #define POKEMON_H
 
 #include <rt2d/entity.h>
-#include "move.h";
+#include "move.h"
 #include <vector>
 
 /// @brief The Pokemon class is the Entity implementation.
