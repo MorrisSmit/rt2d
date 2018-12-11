@@ -25,6 +25,9 @@ public:
 	void makePokemon();
 	void computerStart();
 	void computerSwitch();
+	void attack();
+	void enemyAttack();
+	void playerSwitch();
 
 	/// @brief update is automatically called every frame
 	/// @param deltaTime the elapsed time in seconds
@@ -40,6 +43,7 @@ private:
 	Pokemon* blastoise2;
 
 	int randNum;
+	int playerChoice;
 
 	/// @brief a Timer to rotate the color every n seconds
 	Timer t;

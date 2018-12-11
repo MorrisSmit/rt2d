@@ -60,15 +60,7 @@ void MyScene::update(float deltaTime)
 	}
 	if (input()->getKeyUp(KeyCode::Up) && currentAllyPokemon != nullptr && currentEnemyPokemon->isAlive())
 	{
-		currentAllyPokemon->attack(currentEnemyPokemon);
-		std::cout << "The enemy " << currentEnemyPokemon->getName() << " took damage! Remaining health: " << currentEnemyPokemon->getHealth() << std::endl;
-		if (!currentEnemyPokemon->isAlive()) 
-		{
-			std::cout << "The enemy " << currentEnemyPokemon->getName() << " fainted" << std::endl;
-			computerSwitch();
-			
-			
-		}
+		attack();
 	}
 	if (input()->getKeyUp(KeyCode::A) && currentAllyPokemon == nullptr)
 	{
@@ -88,7 +80,6 @@ void MyScene::update(float deltaTime)
 }
 void MyScene::makePokemon() 
 {
-	
 	absol = new Absol(0);
 	blastoise = new Blastoise(0);
 	this->addChild(absol);
@@ -108,41 +99,78 @@ void MyScene::computerStart()
 {
 	srand(time(nullptr));
 	randNum = rand() % 2;
-	if (randNum == 1) 
-	{
-		std::cout << "The enemy sent out Absol!" << std::endl;
-		currentEnemyPokemon = computerTeam[0];
-		computerTeam[0]->position = enemyposition;
-		std::cout << "The enemy sent out " << (currentEnemyPokemon->getName()) << "!" << std::endl;
-	}
-	else 
-	{
-		std::cout << "The enemy sent out Blastoise!" << std::endl;
-		currentEnemyPokemon = computerTeam[1];
-		computerTeam[1]->position = enemyposition;
-		std::cout << "The enemy sent out " << (currentEnemyPokemon->getName()) << "!" << std::endl;
-	}
+	
+	currentEnemyPokemon = computerTeam[randNum];
+	computerTeam[randNum]->position = enemyposition;
+	std::cout << "The enemy sent out " << (currentEnemyPokemon->getName()) << "!" << std::endl;
+	
 }
 
 void MyScene::computerSwitch()
 {
-	randNum = rand() % 2;
-	if (randNum == 0 && computerTeam[randNum]->isAlive()) 
+	randNum = rand() % computerTeam.size();
+	if (computerTeam[randNum]->isAlive()) 
 	{
-		currentEnemyPokemon = computerTeam[0];
-		computerTeam[0]->position = enemyposition;
+		currentEnemyPokemon = computerTeam[randNum];
+		computerTeam[randNum]->position = enemyposition;
 		std::cout << "The enemy sent out " << currentEnemyPokemon->getName() << "!" << std::endl;
 	}
-	else if (computerTeam[1]->isAlive())
+	else if(!computerTeam[0]->isAlive() && !computerTeam[1]->isAlive())
 	{
-		currentEnemyPokemon = computerTeam[1];
-		computerTeam[1]->position = enemyposition;
-		std::cout << "The enemy sent out " << currentEnemyPokemon->getName() << "!" << std::endl;
+		std::cout << "You won!" << std::endl;
+		this->stop();
+	}
+}
+void MyScene::attack() 
+{
+	currentAllyPokemon->attack(currentEnemyPokemon);
+	std::cout << "The enemy " << currentEnemyPokemon->getName() << " took damage! Remaining health: " << currentEnemyPokemon->getHealth() << std::endl;
+	if (!currentEnemyPokemon->isAlive())
+	{
+		std::cout << "The enemy " << currentEnemyPokemon->getName() << " fainted" << std::endl;
+		computerSwitch();
+	}
+	enemyAttack();
+}
+void MyScene::enemyAttack() 
+{
+	currentEnemyPokemon->attack(currentAllyPokemon);
+	std::cout << "your " << currentAllyPokemon->getName() << " took damage! Remaining health: " << currentAllyPokemon->getHealth() << std::endl;
+	if (!currentAllyPokemon->isAlive())
+	{
+		currentAllyPokemon->position = Point2(0, 1250);
+		std::cout << "your " << currentAllyPokemon->getName() << " fainted" << std::endl;
+		playerSwitch();
+	}
+}
+void MyScene::playerSwitch() 
+{
+	std::cout << "Which pokemon would you like to send out? " << std::endl;
+	for (int i = 0; i < playerTeam.size(); i++) {
+		std::cout << i  << " " << playerTeam[i]->getName() << " remaining health: " <<  playerTeam[i]->getHealth() <<  std::endl;
+	}
+
+	std::cin >> playerChoice;
+
+	if (!playerTeam[playerChoice]->isAlive()) 
+	{
+		std::cout << "that pokemon is not fit for battle anymore!" << std::endl;
+		playerSwitch();
+	}
+	else if (playerTeam[playerChoice] == NULL) 
+	{
+		std::cout << "That is not a valid choice!" << std::endl;
+		playerSwitch();
 	}
 	else 
 	{
-		std::cout << "You won!" << std::endl;
+		currentAllyPokemon = playerTeam[playerChoice];
+		currentAllyPokemon->position = allyposition;
+		std::cout << "You sent out: " << playerTeam[playerChoice]->getName() << "!" << std::endl;
 	}
+	
+		//std::cout << "You lost!" << std::endl;
+	
 }
 
 

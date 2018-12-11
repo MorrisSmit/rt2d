@@ -30,6 +30,7 @@ public:
 	std::string getName();
 	bool isAlive();
 
+
 protected:
 	int health;
 	std::vector<Move> moveset;
