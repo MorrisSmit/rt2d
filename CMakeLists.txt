@@ -162,6 +162,10 @@ IF(MAKE_PAINITE)
 		painite/blastoise.h
 		painite/button.cpp
 		painite/button.h
+		painite/venusaur.cpp
+		painite/venusaur.h
+		painite/charizard.cpp
+		painite/charizard.h
 	)
 	target_link_libraries(painite
 		${ALL_GRAPHICS_LIBS}

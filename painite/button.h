@@ -1,9 +1,9 @@
 /**
 * Copyright 2015 Your Name <you@yourhost.com>
 *
-* @file pokemon.h
+* @file button.h
 *
-* @brief description of Pokemon behavior.
+* @brief description of button behavior.
 */
 
 
@@ -16,14 +16,16 @@
 class Button : public Entity
 {
 public:
-
    // Button constructor
-   Button();
+	Button();
 
    // Button destructor
    ~Button();
-private:
 
+	//check if button is pressed
+	bool isPressed();
+private:
+	
 };
 
 #endif // !BUTTON_H

@@ -11,6 +11,7 @@
 #include "myscene.h"
 #include "absol.h"
 #include "blastoise.h"
+#include "charizard.h"
 
 MyScene::MyScene() : Scene()
 {
@@ -24,6 +25,7 @@ MyScene::MyScene() : Scene()
 	
 
 	makePokemon();
+
 
 	std::cout << "which pokemon would u like to send out first? " << std::endl;
 	std::cout << "press A for absol " << std::endl;
@@ -41,12 +43,16 @@ MyScene::~MyScene()
 	this->removeChild(absol2);
 	this->removeChild(blastoise);
 	this->removeChild(blastoise2);
+	this->removeChild(charizard);
+	this->removeChild(charizard2);
 
 	// delete absol from the heap (there was a 'new' in the constructor)
 	delete absol;
 	delete absol2;
 	delete blastoise;
 	delete blastoise2;
+	delete charizard;
+	delete charizard2;
 }
 
 void MyScene::update(float deltaTime)
@@ -81,18 +87,29 @@ void MyScene::update(float deltaTime)
 void MyScene::makePokemon() 
 {
 	absol = new Absol(0);
-	blastoise = new Blastoise(0);
 	this->addChild(absol);
 	playerTeam.push_back(absol);
+
+	blastoise = new Blastoise(0);
 	this->addChild(blastoise);
 	playerTeam.push_back(blastoise);
+
+	//charizard = new Charizard(0);
+	//this->addChild(charizard);
+	//playerTeam.push_back(charizard);
 	
+
 	absol2 = new Absol(1);
-	blastoise2 = new Blastoise(1);
 	this->addChild(absol2);
 	computerTeam.push_back(absol2);
+
+	blastoise2 = new Blastoise(1);
 	this->addChild(blastoise2);
 	computerTeam.push_back(blastoise2);
+
+	charizard = new Charizard(1);
+	this->addChild(charizard2);
+	playerTeam.push_back(charizard2);
 }
 
 void MyScene::computerStart() 
@@ -115,7 +132,7 @@ void MyScene::computerSwitch()
 		computerTeam[randNum]->position = enemyposition;
 		std::cout << "The enemy sent out " << currentEnemyPokemon->getName() << "!" << std::endl;
 	}
-	else if(!computerTeam[0]->isAlive() && !computerTeam[1]->isAlive())
+	else if(!computerTeam[0]->isAlive() && !computerTeam[1]->isAlive() && !computerTeam[1]->isAlive())
 	{
 		std::cout << "You won!" << std::endl;
 		this->stop();

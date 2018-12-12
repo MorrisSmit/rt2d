@@ -29,6 +29,7 @@ public:
 	void enemyAttack();
 	void playerSwitch();
 
+
 	/// @brief update is automatically called every frame
 	/// @param deltaTime the elapsed time in seconds
 	/// @return void
@@ -38,9 +39,11 @@ private:
 	/// @brief the rotating square in the middle of the screen
 	Pokemon* absol;
 	Pokemon* blastoise;
+	Pokemon* charizard;
 	
 	Pokemon* absol2;
 	Pokemon* blastoise2;
+	Pokemon* charizard2;
 
 	int randNum;
 	int playerChoice;
