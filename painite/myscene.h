@@ -28,6 +28,7 @@ public:
 	void attack();
 	void enemyAttack();
 	void playerSwitch();
+	void faintPokemon(Pokemon* p);
 
 
 	/// @brief update is automatically called every frame

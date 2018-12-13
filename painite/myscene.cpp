@@ -30,6 +30,7 @@ MyScene::MyScene() : Scene()
 	std::cout << "which pokemon would u like to send out first? " << std::endl;
 	std::cout << "press A for absol " << std::endl;
 	std::cout << "press S for blastoise " << std::endl;
+	std::cout << "press D for charizard " << std::endl;
 
 	//std::cout << "main\n";
 	
@@ -82,6 +83,13 @@ void MyScene::update(float deltaTime)
 		currentAllyPokemon = playerTeam[1];
 		computerStart();
 	}
+	if (input()->getKeyUp(KeyCode::D) && currentAllyPokemon == nullptr)
+	{
+		std::cout << "you sent out " << playerTeam[2]->getName() << "!" << std::endl;
+		playerTeam[2]->position = allyposition;
+		currentAllyPokemon = playerTeam[2];
+		computerStart();
+	}
 
 }
 void MyScene::makePokemon() 
@@ -94,9 +102,9 @@ void MyScene::makePokemon()
 	this->addChild(blastoise);
 	playerTeam.push_back(blastoise);
 
-	//charizard = new Charizard(0);
-	//this->addChild(charizard);
-	//playerTeam.push_back(charizard);
+	charizard = new Charizard(0);
+	this->addChild(charizard);
+	playerTeam.push_back(charizard);
 	
 
 	absol2 = new Absol(1);
@@ -107,9 +115,9 @@ void MyScene::makePokemon()
 	this->addChild(blastoise2);
 	computerTeam.push_back(blastoise2);
 
-	charizard = new Charizard(1);
+	charizard2 = new Charizard(1);
 	this->addChild(charizard2);
-	playerTeam.push_back(charizard2);
+	computerTeam.push_back(charizard2);
 }
 
 void MyScene::computerStart() 
@@ -184,9 +192,10 @@ void MyScene::playerSwitch()
 		currentAllyPokemon = playerTeam[playerChoice];
 		currentAllyPokemon->position = allyposition;
 		std::cout << "You sent out: " << playerTeam[playerChoice]->getName() << "!" << std::endl;
-	}
-	
-		//std::cout << "You lost!" << std::endl;
+	}	
+}
+void MyScene::faintPokemon(Pokemon* p)
+{
 	
 }
 
