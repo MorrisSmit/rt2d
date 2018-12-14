@@ -13,6 +13,8 @@
 
 
 #include "pokemon.h"
+#include "button.h"
+#include <vector>
 
 /// @brief The MyScene class is the Scene implementation.
 class MyScene : public Scene
@@ -28,7 +30,9 @@ public:
 	void attack();
 	void enemyAttack();
 	void playerSwitch();
-	void faintPokemon(Pokemon* p);
+	void checkButtonClick();
+
+	void makeButton();
 
 
 	/// @brief update is automatically called every frame
@@ -38,18 +42,20 @@ public:
 
 private:
 	/// @brief the rotating square in the middle of the screen
-	Pokemon* absol;
+	Pokemon* venusaur;
 	Pokemon* blastoise;
 	Pokemon* charizard;
 	
-	Pokemon* absol2;
+	Pokemon* venusaur2;
 	Pokemon* blastoise2;
 	Pokemon* charizard2;
 
 	int randNum;
 	int playerChoice;
 
-	/// @brief a Timer to rotate the color every n seconds
+	Button* testButton;
+	std::vector<Button*> buttonList;
+
 	Timer t;
 	Point allyposition;
 	Point enemyposition;

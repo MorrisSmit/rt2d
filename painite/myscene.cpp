@@ -12,6 +12,7 @@
 #include "absol.h"
 #include "blastoise.h"
 #include "charizard.h"
+#include "venusaur.h"
 
 MyScene::MyScene() : Scene()
 {
@@ -23,12 +24,13 @@ MyScene::MyScene() : Scene()
 	currentEnemyPokemon = nullptr;
 	currentAllyPokemon = nullptr;
 	
+	makeButton()
 
 	makePokemon();
 
 
 	std::cout << "which pokemon would u like to send out first? " << std::endl;
-	std::cout << "press A for absol " << std::endl;
+	std::cout << "press A for venusaur " << std::endl;
 	std::cout << "press S for blastoise " << std::endl;
 	std::cout << "press D for charizard " << std::endl;
 
@@ -40,16 +42,16 @@ MyScene::MyScene() : Scene()
 MyScene::~MyScene()
 {
 	// deconstruct and delete the Tree
-	this->removeChild(absol);
-	this->removeChild(absol2);
+	this->removeChild(venusaur);
+	this->removeChild(venusaur2);
 	this->removeChild(blastoise);
 	this->removeChild(blastoise2);
 	this->removeChild(charizard);
 	this->removeChild(charizard2);
 
 	// delete absol from the heap (there was a 'new' in the constructor)
-	delete absol;
-	delete absol2;
+	delete venusaur;
+	delete venusaur2;
 	delete blastoise;
 	delete blastoise2;
 	delete charizard;
@@ -71,32 +73,33 @@ void MyScene::update(float deltaTime)
 	}
 	if (input()->getKeyUp(KeyCode::A) && currentAllyPokemon == nullptr)
 	{
-		std::cout << "you sent out " << absol->getName()<< "!" << std::endl;
-		playerTeam[0]->position = allyposition;
 		currentAllyPokemon = playerTeam[0];
+		playerTeam[0]->position = allyposition;
+		std::cout << "you sent out " << currentAllyPokemon->getName() << "!" << std::endl;
 		computerStart();
 	}
 	if (input()->getKeyUp(KeyCode::S) && currentAllyPokemon == nullptr)
 	{
- 		std::cout << "you sent out "<< playerTeam[1]->getName() << "!"  <<  std::endl;
-		playerTeam[1]->position = allyposition;
+
 		currentAllyPokemon = playerTeam[1];
+		playerTeam[1]->position = allyposition;
+		std::cout << "you sent out " << playerTeam[1]->getName() << "!" << std::endl;
 		computerStart();
 	}
 	if (input()->getKeyUp(KeyCode::D) && currentAllyPokemon == nullptr)
 	{
-		std::cout << "you sent out " << playerTeam[2]->getName() << "!" << std::endl;
-		playerTeam[2]->position = allyposition;
 		currentAllyPokemon = playerTeam[2];
+		playerTeam[2]->position = allyposition;
+		std::cout << "you sent out " << playerTeam[2]->getName() << "!" << std::endl;
 		computerStart();
 	}
 
 }
 void MyScene::makePokemon() 
 {
-	absol = new Absol(0);
-	this->addChild(absol);
-	playerTeam.push_back(absol);
+	venusaur = new Venusaur(0);
+	this->addChild(venusaur);
+	playerTeam.push_back(venusaur);
 
 	blastoise = new Blastoise(0);
 	this->addChild(blastoise);
@@ -107,9 +110,9 @@ void MyScene::makePokemon()
 	playerTeam.push_back(charizard);
 	
 
-	absol2 = new Absol(1);
-	this->addChild(absol2);
-	computerTeam.push_back(absol2);
+	venusaur2 = new Venusaur(1);
+	this->addChild(venusaur2);
+	computerTeam.push_back(venusaur2);
 
 	blastoise2 = new Blastoise(1);
 	this->addChild(blastoise2);
@@ -177,26 +180,31 @@ void MyScene::playerSwitch()
 
 	std::cin >> playerChoice;
 
-	if (!playerTeam[playerChoice]->isAlive()) 
-	{
-		std::cout << "that pokemon is not fit for battle anymore!" << std::endl;
-		playerSwitch();
-	}
-	else if (playerTeam[playerChoice] == NULL) 
+	if (playerTeam[playerChoice] == NULL)
 	{
 		std::cout << "That is not a valid choice!" << std::endl;
 		playerSwitch();
 	}
+	else if (!playerTeam[playerChoice]->isAlive()) 
+	{
+		std::cout << "that pokemon is not fit for battle anymore!" << std::endl;
+		playerSwitch();
+	}
 	else 
 	{
-		currentAllyPokemon = playerTeam[playerChoice];
-		currentAllyPokemon->position = allyposition;
-		std::cout << "You sent out: " << playerTeam[playerChoice]->getName() << "!" << std::endl;
+		
 	}	
 }
-void MyScene::faintPokemon(Pokemon* p)
+
+void MyScene::checkButtonClick() 
 {
-	
+
+}
+
+void MyScene::makeButton() 
+{
+	testButton = new Button("test");
+	this->addChild(testButton);
 }
 
 

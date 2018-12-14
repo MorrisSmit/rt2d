@@ -11,21 +11,38 @@
 #define BUTTON_H
 
 #include <rt2d/entity.h>
+#include <rt2d/text.h>
+#include <functional>
 
 
 class Button : public Entity
 {
 public:
    // Button constructor
-	Button();
+	Button(std::string name);
 
    // Button destructor
    ~Button();
 
 	//check if button is pressed
-	bool isPressed();
-private:
+	void checkifPressed();
+
+	void runFunction();
+
+	void setFunction(std::function<void()> value);
 	
+	void update(float deltatime);
+
+
+private:
+	int yPos;
+	int xPos;
+	double mouseY;
+	double mouseX;
+	Text* text;
+
+	std::function<void()> doFunction = nullptr;
+
 };
 
 #endif // !BUTTON_H

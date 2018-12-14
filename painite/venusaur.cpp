@@ -12,7 +12,7 @@ Venusaur::Venusaur(int side) : Pokemon()
 	}
 	else
 	{
-		this->addSprite("assets/venusaur_backtga");
+		this->addSprite("assets/venusaur_back.tga");
 	}
 }
 

@@ -1,8 +1,11 @@
 #include "button.h"
 
-Button::Button()
+Button::Button(std::string name)
 {
-	 
+	text = new Text();
+	text->message(name, WHITE);
+
+	this->addChild(text);
 }
 
 Button::~Button()
@@ -10,7 +13,28 @@ Button::~Button()
    
 }
 
-bool isPressed()
+void Button::update(float deltatime) 
 {
-	return true;
+
+}
+
+void Button::checkifPressed()
+{
+	mouseX = input()->getMouseX();
+	mouseY = input()->getMouseY();
+	xPos = position.x - ((this->sprite()->width() * scale.x) / 2);
+	yPos = position.y - ((this->sprite()->height() * scale.y) / 2);
+	if (mouseX > xPos && mouseX < xPos + (this->sprite()->width() * scale.x) && mouseY > yPos && mouseY < yPos + (this->sprite()->height() * scale.y)) {
+		this->sprite->color = RED;
+		runFunction();
+	}
+}
+void Button::runFunction() 
+{
+
+}
+
+void Button::setFunction(std::function<void()> value) 
+{
+	doFunction = value;
 }
