@@ -63,6 +63,13 @@ void MyScene::update(float deltaTime)
 	// ###############################################################
 	// Escape key stops the Scene
 	// ###############################################################
+
+	
+
+	if (input()->getMouseDown(0)) 
+	{
+		checkButtonClick();
+	}
 	if (input()->getKeyUp(KeyCode::Escape)) 
 	{
 		this->stop();
@@ -209,9 +216,13 @@ void MyScene::makeButton()
 	testButton = new Button("test");
 	buttonList.push_back(testButton);
 	this->addChild(testButton);
-	testButton->setFunction(std::bind(&MyScene::computerSwitch, this));
+	testButton->setFunction(std::bind(&MyScene::test, this));
 	testButton->position = Point2(SWIDTH / 3, SHEIGHT / 3);
 
+}
+void MyScene::test() 
+{
+	std::cout << "button pressed" << std::endl;
 }
 
 

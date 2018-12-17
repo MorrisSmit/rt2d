@@ -6,6 +6,9 @@ Button::Button(std::string name)
 
 	text = new Text();
 	text->message(name, WHITE);
+	scaleText(0.45);
+	float x = -20;
+	text->position.x = x;
 
 	this->addChild(text);
 }
@@ -26,17 +29,20 @@ void Button::checkIfPressed()
 	mouseY = input()->getMouseY();
 	xPos = position.x - ((this->sprite()->width() * scale.x) / 2);
 	yPos = position.y - ((this->sprite()->height() * scale.y) / 2);
-	if (mouseX > xPos && mouseX < xPos + (this->sprite()->width() * scale.x) && mouseY > yPos && mouseY < yPos + (this->sprite()->height() * scale.y)) {
+	if (mouseX > xPos && mouseX < xPos + (this->sprite()->width() * scale.x) && mouseY > yPos && mouseY < yPos + (this->sprite()->height() * scale.y)) 
+	{
 		this->sprite()->color = RED;
-		runFunction();
+		doFunction();
 	}
 }
-void Button::runFunction() 
-{
 
-}
 
 void Button::setFunction(std::function<void()> value) 
 {
 	doFunction = value;
+}
+
+void Button::scaleText(float scale) 
+{
+	text->scale = Point2(scale, scale);
 }

@@ -27,11 +27,11 @@ public:
 	//check if button is pressed
 	void checkIfPressed();
 
-	void runFunction();
-
 	void setFunction(std::function<void()> value);
 	
 	void update(float deltatime);
+
+	void scaleText(float scale);
 
 
 private:

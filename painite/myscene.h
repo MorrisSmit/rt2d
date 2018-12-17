@@ -33,6 +33,7 @@ public:
 	void checkButtonClick();
 
 	void makeButton();
+	void test();
 
 
 	/// @brief update is automatically called every frame
