@@ -25,7 +25,7 @@ public:
    ~Button();
 
 	//check if button is pressed
-	void checkifPressed();
+	void checkIfPressed();
 
 	void runFunction();
 

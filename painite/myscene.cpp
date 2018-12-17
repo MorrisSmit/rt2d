@@ -24,7 +24,7 @@ MyScene::MyScene() : Scene()
 	currentEnemyPokemon = nullptr;
 	currentAllyPokemon = nullptr;
 	
-	makeButton()
+	makeButton();
 
 	makePokemon();
 
@@ -180,7 +180,7 @@ void MyScene::playerSwitch()
 
 	std::cin >> playerChoice;
 
-	if (playerTeam[playerChoice] == NULL)
+	if (playerTeam[playerChoice] == nullptr)
 	{
 		std::cout << "That is not a valid choice!" << std::endl;
 		playerSwitch();
@@ -192,19 +192,26 @@ void MyScene::playerSwitch()
 	}
 	else 
 	{
-		
+		std::cout << "idk what to do now" << std::endl;
+		playerSwitch();
 	}	
 }
 
 void MyScene::checkButtonClick() 
 {
-
+	for (int i = 0; i < buttonList.size(); i++) {
+		buttonList[i]->checkIfPressed();
+	}
 }
 
 void MyScene::makeButton() 
 {
 	testButton = new Button("test");
+	buttonList.push_back(testButton);
 	this->addChild(testButton);
+	testButton->setFunction(std::bind(&MyScene::computerSwitch, this));
+	testButton->position = Point2(SWIDTH / 3, SHEIGHT / 3);
+
 }
 
 
