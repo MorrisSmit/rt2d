@@ -33,6 +33,11 @@ public:
 
 	void scaleText(float scale);
 
+	void scaleButton(Point2 scale);
+
+	void setTextxPosition(int x);
+	void setTextyPosition(int y);
+
 
 private:
 	int yPos;

@@ -26,9 +26,11 @@ public:
 	void Pokemon::update(float deltaTime);
 	void takeDamage(int amount);
 	int getHealth();
-	void attack(Pokemon *p);
+	virtual void attack(Pokemon *other) = 0;
 	std::string getName();
 	bool isAlive();
+
+
 
 
 protected:
@@ -36,7 +38,6 @@ protected:
 	std::vector<Move> moveset;
 	std::string name;
 	std::string type;
-	Move* tackle;
 
 private:
 

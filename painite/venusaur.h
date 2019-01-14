@@ -20,6 +20,8 @@ public:
 	/// @brief Destructor
 	virtual ~Venusaur();
 
+	void attack(Pokemon *other);
+
 
 private:
 	Venusaur();

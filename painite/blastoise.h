@@ -20,6 +20,9 @@ public:
 	/// @brief Destructor
 	virtual ~Blastoise();
 
+	void attack(Pokemon *other);
+
+
 
 private:
 	Blastoise();

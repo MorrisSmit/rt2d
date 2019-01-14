@@ -1,13 +1,13 @@
 #include "button.h"
 
-Button::Button(std::string name)
+Button::Button(std::string name):Entity()
 {
+	std::cout << "test" << std::endl;
 	this->addSprite("assets/Button.tga");
 
 	text = new Text();
 	text->message(name, WHITE);
-	scaleText(0.45);
-	float x = -20;
+	float x = -25;
 	text->position.x = x;
 
 	this->addChild(text);
@@ -36,6 +36,15 @@ void Button::checkIfPressed()
 	}
 }
 
+void Button::setTextxPosition(int x) 
+{
+	text->position.x = x;
+}
+
+void Button::setTextyPosition(int y)
+{
+	text->position.y = y;
+}
 
 void Button::setFunction(std::function<void()> value) 
 {
@@ -45,4 +54,9 @@ void Button::setFunction(std::function<void()> value)
 void Button::scaleText(float scale) 
 {
 	text->scale = Point2(scale, scale);
+}
+
+void Button::scaleButton(Point2 scale) 
+{
+	this->scale = scale;
 }

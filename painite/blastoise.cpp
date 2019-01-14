@@ -16,6 +16,11 @@ Blastoise::Blastoise(int side) : Pokemon()
 	}
 }
 
+void Blastoise::attack(Pokemon *other)
+{
+	other->takeDamage(20);
+}
+
 
 Blastoise::~Blastoise()
 {

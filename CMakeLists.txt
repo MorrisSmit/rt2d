@@ -13,7 +13,7 @@ OPTION(MAKE_NOISE "Make Perlin Noise application" ON)
 OPTION(MAKE_GEOMETRIC "Make GeoMetric application" ON)
 OPTION(MAKE_SHADY "Make custom Shader application" ON)
 OPTION(MAKE_WOLFENSTEIN "Make Wolfenstein3D raycasting application" ON)
-OPTION(MAKE_PAINITE "Make diamond application" ON)
+OPTION(MAKE_PAINITE "Make Painite application" ON)
 
 OPTION(USE_RS232 "Use RS232 library" OFF)
 OPTION(MAKE_SERIAL "Make serial application" OFF)
@@ -154,8 +154,6 @@ IF(MAKE_PAINITE)
 		painite/pokemon.h
 		painite/myscene.cpp
 		painite/myscene.h
-		painite/absol.cpp
-		painite/absol.h
 		painite/move.cpp
 		painite/move.h
 		painite/blastoise.cpp

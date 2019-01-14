@@ -1,3 +1,4 @@
+
 /**
  * This class describes MyScene behavior.
  *
@@ -9,7 +10,6 @@
 #include <cstdlib>
 
 #include "myscene.h"
-#include "absol.h"
 #include "blastoise.h"
 #include "charizard.h"
 #include "venusaur.h"
@@ -23,25 +23,22 @@ MyScene::MyScene() : Scene()
 
 	currentEnemyPokemon = nullptr;
 	currentAllyPokemon = nullptr;
-	
-	makeButton();
 
 	makePokemon();
 
+	makeStartbuttons();
+	
+	counter = 0;
 
-	std::cout << "which pokemon would u like to send out first? " << std::endl;
-	std::cout << "press A for venusaur " << std::endl;
-	std::cout << "press S for blastoise " << std::endl;
-	std::cout << "press D for charizard " << std::endl;
+
+
 
 	//std::cout << "main\n";
-	
 }
 
 
 MyScene::~MyScene()
 {
-	// deconstruct and delete the Tree
 	this->removeChild(venusaur);
 	this->removeChild(venusaur2);
 	this->removeChild(blastoise);
@@ -49,7 +46,7 @@ MyScene::~MyScene()
 	this->removeChild(charizard);
 	this->removeChild(charizard2);
 
-	// delete absol from the heap (there was a 'new' in the constructor)
+	// delete pokemon from the heap (there was a 'new' in the constructor)
 	delete venusaur;
 	delete venusaur2;
 	delete blastoise;
@@ -60,10 +57,11 @@ MyScene::~MyScene()
 
 void MyScene::update(float deltaTime)
 {
-	// ###############################################################
-	// Escape key stops the Scene
-	// ###############################################################
-
+	if (counter == 0)
+	{
+		std::cout << buttonList[0]->sprite()->height() << std::endl;
+		counter = 1;
+	}
 	
 
 	if (input()->getMouseDown(0)) 
@@ -78,30 +76,9 @@ void MyScene::update(float deltaTime)
 	{
 		attack();
 	}
-	if (input()->getKeyUp(KeyCode::A) && currentAllyPokemon == nullptr)
-	{
-		currentAllyPokemon = playerTeam[0];
-		playerTeam[0]->position = allyposition;
-		std::cout << "you sent out " << currentAllyPokemon->getName() << "!" << std::endl;
-		computerStart();
-	}
-	if (input()->getKeyUp(KeyCode::S) && currentAllyPokemon == nullptr)
-	{
-
-		currentAllyPokemon = playerTeam[1];
-		playerTeam[1]->position = allyposition;
-		std::cout << "you sent out " << playerTeam[1]->getName() << "!" << std::endl;
-		computerStart();
-	}
-	if (input()->getKeyUp(KeyCode::D) && currentAllyPokemon == nullptr)
-	{
-		currentAllyPokemon = playerTeam[2];
-		playerTeam[2]->position = allyposition;
-		std::cout << "you sent out " << playerTeam[2]->getName() << "!" << std::endl;
-		computerStart();
-	}
 
 }
+
 void MyScene::makePokemon() 
 {
 	venusaur = new Venusaur(0);
@@ -116,7 +93,6 @@ void MyScene::makePokemon()
 	this->addChild(charizard);
 	playerTeam.push_back(charizard);
 	
-
 	venusaur2 = new Venusaur(1);
 	this->addChild(venusaur2);
 	computerTeam.push_back(venusaur2);
@@ -135,8 +111,7 @@ void MyScene::computerStart()
 	srand(time(nullptr));
 	randNum = rand() % 2;
 	
-	currentEnemyPokemon = computerTeam[randNum];
-	computerTeam[randNum]->position = enemyposition;
+	activatePokemon(computerTeam[randNum], 1);
 	std::cout << "The enemy sent out " << (currentEnemyPokemon->getName()) << "!" << std::endl;
 	
 }
@@ -146,8 +121,7 @@ void MyScene::computerSwitch()
 	randNum = rand() % computerTeam.size();
 	if (computerTeam[randNum]->isAlive()) 
 	{
-		currentEnemyPokemon = computerTeam[randNum];
-		computerTeam[randNum]->position = enemyposition;
+		activatePokemon(computerTeam[randNum], 1);
 		std::cout << "The enemy sent out " << currentEnemyPokemon->getName() << "!" << std::endl;
 	}
 	else if(!computerTeam[0]->isAlive() && !computerTeam[1]->isAlive() && !computerTeam[1]->isAlive())
@@ -156,6 +130,7 @@ void MyScene::computerSwitch()
 		this->stop();
 	}
 }
+
 void MyScene::attack() 
 {
 	currentAllyPokemon->attack(currentEnemyPokemon);
@@ -167,6 +142,7 @@ void MyScene::attack()
 	}
 	enemyAttack();
 }
+
 void MyScene::enemyAttack() 
 {
 	currentEnemyPokemon->attack(currentAllyPokemon);
@@ -178,6 +154,7 @@ void MyScene::enemyAttack()
 		playerSwitch();
 	}
 }
+
 void MyScene::playerSwitch() 
 {
 	std::cout << "Which pokemon would you like to send out? " << std::endl;
@@ -186,6 +163,7 @@ void MyScene::playerSwitch()
 	}
 
 	std::cin >> playerChoice;
+	std::cout << (int)playerChoice << std::endl;
 
 	if (playerTeam[playerChoice] == nullptr)
 	{
@@ -199,9 +177,14 @@ void MyScene::playerSwitch()
 	}
 	else 
 	{
-		std::cout << "idk what to do now" << std::endl;
-		playerSwitch();
+		activatePokemon(playerTeam[playerChoice], 0);
 	}	
+}
+
+void MyScene::removeButton(Button* button) 
+{
+	removeChild(button);
+	delete button;
 }
 
 void MyScene::checkButtonClick() 
@@ -211,19 +194,115 @@ void MyScene::checkButtonClick()
 	}
 }
 
-void MyScene::makeButton() 
+void MyScene::makeStartbuttons() 
 {
-	testButton = new Button("test");
-	buttonList.push_back(testButton);
-	this->addChild(testButton);
-	testButton->setFunction(std::bind(&MyScene::test, this));
-	testButton->position = Point2(SWIDTH / 3, SHEIGHT / 3);
+	cButton = new Button("Charizard");
+	cButton->addSprite("assets/charizard_front.tga");
+	buttonList.push_back(cButton);
+	this->addChild(cButton);
+	cButton->setFunction(std::bind(&MyScene::chooseCharizard, this));
+	cButton->position = Point2(750, SHEIGHT / 2);
+	cButton->scaleText(0.5);
+	cButton->setTextyPosition(50);
+
+
+	vButton = new Button("Venusaur");
+	vButton->addSprite("assets/venusaur_front.tga");
+	buttonList.push_back(vButton);
+	this->addChild(vButton);
+	vButton->setFunction(std::bind(&MyScene::chooseVenusaur, this));
+	vButton->position = Point2(500, SHEIGHT / 2);
+	vButton->scaleText(0.5);
+	vButton->setTextyPosition(50);
+
+	bButton = new Button("Blastoise");
+	bButton->addSprite("assets/blastoise_front.tga");
+	buttonList.push_back(bButton);
+	this->addChild(bButton);
+	bButton->setFunction(std::bind(&MyScene::chooseBlastoise, this));
+	bButton->position = Point2(250, SHEIGHT / 2);
+	bButton->scaleText(0.5);
+	bButton->setTextyPosition(50);
 
 }
-void MyScene::test() 
+
+//void MyScene::makeButton(
+//	std::string name, Scene* sceneToCall, std::function<void()> functionToCall,float xpos, float ypos, float scale
+//) 
+//{
+//	Button* button = new Button(name);
+//	button->setFunction(std::bind(&sceneToCall::functionToCall, this));
+//}
+
+void MyScene::chooseCharizard() 
 {
-	std::cout << "button pressed" << std::endl;
+	activatePokemon(charizard, 0);
+	computerStart();
+	removeButtons();
+	makeBattleButtons();
 }
+
+void MyScene::chooseVenusaur()
+{
+	activatePokemon(venusaur, 0);
+	computerStart();
+	removeButtons();
+	makeBattleButtons();
+}
+
+void MyScene::chooseBlastoise() 
+{
+	activatePokemon(blastoise, 0);
+	computerStart();
+	removeButtons();
+	makeBattleButtons();
+}
+
+void MyScene::makeBattleButtons() 
+{
+	Button* switchButton = new Button("switch");
+	buttonList.push_back(switchButton);
+	switchButton->setFunction(std::bind(&MyScene::playerSwitch, this));
+	switchButton->position = Point2(250, SHEIGHT - 44);
+	switchButton->scaleText(0.2);
+	switchButton->scaleButton(Point2(3,3));
+	this->addChild(switchButton);
+	std::cout << switchButton->sprite() << std::endl;
+
+	Button* attackButton = new Button("attack");
+	buttonList.push_back(attackButton);
+	attackButton->setFunction(std::bind(&MyScene::attack, this));
+	attackButton->position = Point2(500, SHEIGHT - 44);
+	attackButton->scaleText(0.2);
+	attackButton->scaleButton(Point2(3,3));
+	this->addChild(attackButton);
+	std::cout << attackButton->sprite()->height() << std::endl;
+}
+void MyScene::activatePokemon(Pokemon* p, int side) 
+{
+	if (side == 0)
+	{
+		currentAllyPokemon = p;
+		p->position = allyposition;
+		std::cout << "you sent out " << currentAllyPokemon->getName() << "!" << std::endl;
+	}
+	else 
+	{
+		currentEnemyPokemon = p;
+		p->position = enemyposition;
+		std::cout << "The enemy sent out " << currentEnemyPokemon->getName() << "!" << std::endl;
+	}
+}
+void MyScene::removeButtons() 
+{
+	for (auto it = buttonList.begin(); it != buttonList.end();) {
+		removeChild(*it);
+		delete (*it); // delete the Bullet from the heap
+		it = buttonList.erase(it); // 'remove' from bullet list. 'erase' returns a pointer to the next element in the list.				   //++counter; // uncomment to find the new index
+	}
+	buttonList.clear();
+}
+
 
 
 

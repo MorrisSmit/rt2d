@@ -16,6 +16,11 @@ Charizard::Charizard(int side) : Pokemon()
 	}
 }
 
+ void Charizard::attack(Pokemon *other) 
+{
+	 other->takeDamage(20);
+}
+
 
 Charizard::~Charizard()
 {

@@ -12,7 +12,7 @@
 	health = 100;
 	type = "normal";
 	name = "unknown";
-	tackle = new Move(30, 20, "tackle");
+	//tackle = new Move(30, 20, "tackle");
 	this->position = Point(0, 1250);
 }
 
@@ -26,10 +26,6 @@ void Pokemon::update(float deltaTime)
 	
 }
 
-void Pokemon::attack(Pokemon* p) 
-{
-	p->takeDamage(20);
-}
 
 void Pokemon::takeDamage(int amount)
 {

@@ -16,6 +16,10 @@ Venusaur::Venusaur(int side) : Pokemon()
 	}
 }
 
+void Venusaur::attack(Pokemon *other)
+{
+	other->takeDamage(20);
+}
 
 Venusaur::~Venusaur()
 {

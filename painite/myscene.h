@@ -13,6 +13,9 @@
 
 
 #include "pokemon.h"
+#include "blastoise.h"
+#include "venusaur.h"
+#include "charizard.h"
 #include "button.h"
 #include <vector>
 
@@ -30,16 +33,32 @@ public:
 	void attack();
 	void enemyAttack();
 	void playerSwitch();
+	void activatePokemon(Pokemon* p, int side);
+
+	//void makeButton(
+	//	std::string name, Scene* sceneToCall, std::function<void()> functionToCall, float xpos, float ypos, float scale
+	//);
+
+	void chooseBlastoise();
+	void chooseVenusaur();
+	void chooseCharizard();
+
 	void checkButtonClick();
 
-	void makeButton();
-	void test();
+	void makeStartbuttons();
 
+	void removeButton(Button* button);
+	void removeButtons();
+
+	void makeBattleButtons();
+
+	//void makeButton(std::string name, std::function<void()> functionToCall, float xpos, float ypos, float scale);
+	
 
 	/// @brief update is automatically called every frame
 	/// @param deltaTime the elapsed time in seconds
 	/// @return void
-	virtual void update(float deltaTime);
+	virtual void update(float deltatime);
 
 private:
 	/// @brief the rotating square in the middle of the screen
@@ -53,8 +72,12 @@ private:
 
 	int randNum;
 	int playerChoice;
+	int counter;
 
-	Button* testButton;
+
+	Button* bButton;
+	Button* vButton;
+	Button* cButton;
 	std::vector<Button*> buttonList;
 
 	Timer t;

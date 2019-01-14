@@ -20,9 +20,11 @@ public:
 	/// @brief Destructor
 	virtual ~Charizard();
 
+	void attack(Pokemon *other);
+
 
 private:
-	Charizard();
+	//Charizard();
 
 };
 
