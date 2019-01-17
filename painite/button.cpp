@@ -2,7 +2,6 @@
 
 Button::Button(std::string name):Entity()
 {
-	std::cout << "test" << std::endl;
 	this->addSprite("assets/Button.tga");
 
 	text = new Text();

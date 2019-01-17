@@ -27,6 +27,7 @@ public:
 	MyScene();
 	/// @brief Destructor
 	virtual ~MyScene();
+
 	void makePokemon();
 	void computerStart();
 	void computerSwitch();
@@ -34,10 +35,7 @@ public:
 	void enemyAttack();
 	void playerSwitch();
 	void activatePokemon(Pokemon* p, int side);
-
-	//void makeButton(
-	//	std::string name, Scene* sceneToCall, std::function<void()> functionToCall, float xpos, float ypos, float scale
-	//);
+	void deactivatePokemon(int side);
 
 	void chooseBlastoise();
 	void chooseVenusaur();
@@ -48,7 +46,6 @@ public:
 	void makeStartbuttons();
 
 	void removeButton(Button* button);
-	void removeButtons();
 
 	void makeBattleButtons();
 
@@ -71,14 +68,21 @@ private:
 	Pokemon* charizard2;
 
 	int randNum;
-	int playerChoice;
-	int counter;
-
 
 	Button* bButton;
 	Button* vButton;
 	Button* cButton;
+	Button* switchButton;
+	Button* attackButton;
 	std::vector<Button*> buttonList;
+
+	Text* cHealth;
+	Text* vHealth;
+	Text* bHealth;
+	
+	std::stringstream charizardHealth;
+	std::stringstream venusaurHealth;
+	std::stringstream blastoiseHealth;
 
 	Timer t;
 	Point allyposition;
