@@ -30,7 +30,7 @@ void Button::checkIfPressed()
 	yPos = position.y - ((this->sprite()->height() * scale.y) / 2);
 	if (mouseX > xPos && mouseX < xPos + (this->sprite()->width() * scale.x) && mouseY > yPos && mouseY < yPos + (this->sprite()->height() * scale.y)) 
 	{
-		this->sprite()->color = RED;
+		//this->sprite()->color = RED;
 		doFunction();
 	}
 }

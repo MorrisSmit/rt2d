@@ -29,7 +29,6 @@ public:
 	virtual ~MyScene();
 
 	void makePokemon();
-	void computerStart();
 	void computerSwitch();
 	void attack();
 	void enemyAttack();
@@ -48,6 +47,10 @@ public:
 	void removeButton(Button* button);
 
 	void makeBattleButtons();
+
+	void updateText();
+
+	void emptyTextstr();
 
 	//void makeButton(std::string name, std::function<void()> functionToCall, float xpos, float ypos, float scale);
 	
@@ -83,6 +86,12 @@ private:
 	std::stringstream charizardHealth;
 	std::stringstream venusaurHealth;
 	std::stringstream blastoiseHealth;
+
+	std::stringstream UiTextstr;
+	std::stringstream UiText2str;
+
+	Text* UiText;
+	Text* UiText2;
 
 	Timer t;
 	Point allyposition;
