@@ -138,6 +138,24 @@ void MyScene::update(float deltaTime)
 		this->stop();
 	}
 
+	if (checkIfGameOver() == 1)
+	{
+		Text loseText;
+		loseText.message("You Lost");
+		loseText.position = (Point2(200, 200));
+	}
+	else if (checkIfGameOver() == 2) 
+	{
+		Text winText;
+		winText.message("You Won!111!!!");
+		winText.position = (Point(200, 200));
+	}
+	else if (checkIfGameOver() == 3) 
+	{
+		Text tieText;
+		tieText.message("IT'S A TIE!!");
+		tieText.position = Point2(200, 200);
+	}
 	//std::cout << input()->getMouseX() << " " <<  input()->getMouseY() << std::endl;
 }
 
@@ -168,6 +186,27 @@ void MyScene::makePokemon()
 	computerTeam.push_back(charizard2);
 }
 
+void MyScene::endGame()
+{
+	t.stop();
+}
+
+int MyScene::checkIfGameOver()
+{
+	if (!playerTeam[0]->isAlive() && !playerTeam[1]->isAlive() && !playerTeam[2]->isAlive())
+	{
+		return 1;
+	}
+	if (!computerTeam[0]->isAlive() && !computerTeam[1]->isAlive() && !computerTeam[2]->isAlive())
+	{
+		return 2;
+	}
+	else if (!computerTeam[0]->isAlive() && !computerTeam[1]->isAlive() && !computerTeam[2]->isAlive() && !playerTeam[0]->isAlive() && !playerTeam[1]->isAlive() && !playerTeam[2]->isAlive()) 
+	{
+		return 3;
+	}
+}
+
 void MyScene::computerSwitch()
 {
 	if (currentEnemyPokemon != nullptr)
@@ -183,7 +222,7 @@ void MyScene::computerSwitch()
 	else if(!computerTeam[0]->isAlive() && !computerTeam[1]->isAlive() && !computerTeam[2]->isAlive())
 	{
 		std::cout << "You won!" << std::endl;
-		this->stop();
+		//this->stop();
 	}
 	else 
 	{
@@ -193,29 +232,45 @@ void MyScene::computerSwitch()
 
 void MyScene::attack() 
 {
-	currentAllyPokemon->attack(currentEnemyPokemon);
-	updateText();
-	std::cout << "The enemy " << currentEnemyPokemon->getName() << " took damage! Remaining health: " << currentEnemyPokemon->getHealth() << std::endl;
+	if (currentAllyPokemon != nullptr && currentEnemyPokemon != nullptr) 
+	{
+		currentAllyPokemon->attack(currentEnemyPokemon);
+	}
+	
+	//std::cout << "The enemy " << currentEnemyPokemon->getName() << " took damage! Remaining health: " << currentEnemyPokemon->getHealth() << std::endl;
 	if (!currentEnemyPokemon->isAlive())
 	{
-		std::cout << "The enemy " << currentEnemyPokemon->getName() << " fainted" << std::endl;
+		//std::cout << "The enemy " << currentEnemyPokemon->getName() << " fainted" << std::endl;
 		computerSwitch();
+		updateText();
 	}
-	updateText();
+	else 
+	{
+		updateText();
+	}
 	enemyAttack();
 }
 
+
 void MyScene::enemyAttack() 
 {
-	currentEnemyPokemon->attack(currentAllyPokemon);
-	updateText();
-	std::cout << "your " << currentAllyPokemon->getName() << " took damage! Remaining health: " << currentAllyPokemon->getHealth() << std::endl;
+	if (currentEnemyPokemon != nullptr && currentAllyPokemon != nullptr) 
+	{
+		currentEnemyPokemon->attack(currentAllyPokemon);
+	}
+	
+	//std::cout << "your " << currentAllyPokemon->getName() << " took damage! Remaining health: " << currentAllyPokemon->getHealth() << std::endl;
 	if (!currentAllyPokemon->isAlive())
 	{
-		std::cout << "your " << currentAllyPokemon->getName() << " fainted" << std::endl;
+		//std::cout << "your " << currentAllyPokemon->getName() << " fainted" << std::endl;
 		playerSwitch();
+		updateText();
 	}
-	updateText();
+	else 
+	{
+		updateText();
+	}
+	
 }
 
 void MyScene::playerSwitch() 
@@ -223,6 +278,7 @@ void MyScene::playerSwitch()
 	emptyTextstr();
 	this->addChild(cButton);
 	charizardHealth.str(std::string());
+	cHealth->clearMessage();
 	charizardHealth << " Remaining health: " << charizard->getHealth();
 	cHealth->message(charizardHealth.str());
 	this->addChild(cHealth);
@@ -232,6 +288,7 @@ void MyScene::playerSwitch()
 
 	this->addChild(vButton);
 	venusaurHealth.str(std::string());
+	vHealth->clearMessage();
 	venusaurHealth << "Remaining health: " << venusaur->getHealth();
 	vHealth->message(venusaurHealth.str());
 	this->addChild(vHealth);
@@ -241,6 +298,7 @@ void MyScene::playerSwitch()
 
 	this->addChild(bButton);
 	blastoiseHealth.str(std::string());
+	bHealth->clearMessage();
 	blastoiseHealth << "Remaining health: " << blastoise->getHealth();
 	bHealth->message(blastoiseHealth.str());
 	this->addChild(bHealth);
@@ -348,17 +406,19 @@ void MyScene::makeBattleButtons()
 
 void MyScene::activatePokemon(Pokemon* p, int side) 
 {
-	if (side == 0)
+	if (side == 0 && p->isAlive())
 	{
 		currentAllyPokemon = p;
 		currentAllyPokemon->position = allyposition;
-		std::cout << "you sent out " << currentAllyPokemon->getName() << "!" << std::endl;
+		//std::cout << "you sent out " << currentAllyPokemon->getName() << "!" << std::endl;
 	}
-	else 
+
+	else if(side == 1 && p->isAlive())
 	{
 		currentEnemyPokemon = p;
 		currentEnemyPokemon->position = enemyposition;
-		std::cout << "The enemy sent out " << currentEnemyPokemon->getName() << "!" << std::endl;
+		//std::cout << "The enemy sent out " << currentEnemyPokemon->getName() << "!" << std::endl;
+
 	}
 }
 
@@ -378,13 +438,19 @@ void MyScene::deactivatePokemon(int side)
 
 void MyScene::updateText() 
 {
-	UiTextstr.str(std::string());
-	UiTextstr << currentAllyPokemon->getName() << " remaining health: " << currentAllyPokemon->getHealth();
-	UiText->message(UiTextstr.str());
+	if (currentAllyPokemon != nullptr) 
+	{
+		UiTextstr.str(std::string());
+		UiTextstr << currentAllyPokemon->getName() << " remaining health: " << currentAllyPokemon->getHealth();
+		UiText->message(UiTextstr.str());
+	}
 
-	UiText2str.str(std::string());
-	UiText2str << currentEnemyPokemon->getName() << " remaining health: " << currentEnemyPokemon->getHealth();
-	UiText2->message(UiText2str.str());
+	if (currentEnemyPokemon != nullptr) 
+	{
+		UiText2str.str(std::string());
+		UiText2str << currentEnemyPokemon->getName() << " remaining health: " << currentEnemyPokemon->getHealth();
+		UiText2->message(UiText2str.str());
+	}
 }
 
 void MyScene::emptyTextstr()

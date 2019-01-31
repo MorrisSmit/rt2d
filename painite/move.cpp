@@ -2,11 +2,11 @@
 
 
 
-Move::Move(int _pp, int _power, std::string _name) : Entity()
+Move::Move(int _power, std::string _name, int _type ) : Entity()
 {
-	pp = _pp;
 	power = _power;
 	name = _name;
+	type = _type;
 }
 
 
@@ -19,6 +19,8 @@ void Move::update(float deltatime)
 {
 
 }
+
+
 
 
 

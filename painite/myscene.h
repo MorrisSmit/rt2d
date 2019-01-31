@@ -97,6 +97,9 @@ private:
 	Point allyposition;
 	Point enemyposition;
 
+	int checkIfGameOver();
+	void endGame();
+
 	std::vector<Pokemon*> playerTeam;
 	std::vector<Pokemon*> computerTeam;
 

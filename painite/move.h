@@ -17,7 +17,7 @@ class Move : public Entity
 {
 public:
 	/// @brief Constructor
-	Move(int _power, int _pp, std::string _name);
+	Move(int _power, std::string _name, int _type);
 	/// @brief Destructor
 	virtual ~Move();
 
@@ -27,11 +27,12 @@ public:
 	void Move::update(float deltaTime);
 
 
+
 private:
 	/* add your private declarations */
 	int power;
-	int pp;
 	std::string name;
+	int type;
 };
 
 #endif /* ABSOL_H */

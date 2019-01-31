@@ -22,9 +22,10 @@ public:
 
 	void attack(Pokemon *other);
 
+	void calculateDamage(float def, float att);
+
 
 private:
-	//Charizard();
 
 };
 

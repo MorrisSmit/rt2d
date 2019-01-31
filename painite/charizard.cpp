@@ -5,6 +5,9 @@
 Charizard::Charizard(int side) : Pokemon()
 {
 	this->scale = Point(4.0f, 4.0f);
+	attackdamage = 20;
+	this->_type = 1;
+	type = _type;
 	name = "Charizard";
 	if (side == 1)
 	{
@@ -18,11 +21,28 @@ Charizard::Charizard(int side) : Pokemon()
 
  void Charizard::attack(Pokemon *other) 
 {
-	 other->takeDamage(20);
+	 if (other != nullptr)
+	 {
+		 if (other->type == 3)
+		 {
+			 attackdamage = attackdamage * 0.75;
+		 }
+		 else if (other->type == 2)
+		 {
+			 attackdamage = attackdamage * 1.5;
+		 }
+		 other->takeDamage(attackdamage);
+		 attackdamage = 20;
+	 }
 }
 
 
 Charizard::~Charizard()
+{
+
+}
+
+void Charizard::calculateDamage(float def, float att)
 {
 
 }

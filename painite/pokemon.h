@@ -30,16 +30,18 @@ public:
 	std::string getName();
 	bool isAlive();
 
-
+	float type;
 
 
 protected:
 	int health;
-	std::vector<Move> moveset;
 	std::string name;
-	std::string type;
+	float _type;
+	float attackdamage;
+
 
 private:
+
 
 };
 

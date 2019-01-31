@@ -10,9 +10,7 @@
  Pokemon::Pokemon() : Entity()
 {
 	health = 100;
-	type = "normal";
 	name = "unknown";
-	//tackle = new Move(30, 20, "tackle");
 	this->position = Point(0, 1250);
 }
 
@@ -31,7 +29,6 @@ void Pokemon::takeDamage(int amount)
 {
 	if ((this->health - amount) <= 0) 
 	{
-		//this->addSprite("assets/square.tga");
 		this->health -= amount;
 		this->position = Point(0, 1250);
 	}
