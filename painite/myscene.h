@@ -36,6 +36,7 @@ public:
 	void activatePokemon(Pokemon* p, int side);
 	void deactivatePokemon(int side);
 
+
 	void chooseBlastoise();
 	void chooseVenusaur();
 	void chooseCharizard();
@@ -45,6 +46,7 @@ public:
 	void makeStartbuttons();
 
 	void removeButton(Button* button);
+	void removeButtons();
 
 	void makeBattleButtons();
 
@@ -92,6 +94,8 @@ private:
 
 	Text* UiText;
 	Text* UiText2;
+
+	bool switchActive;
 
 	Timer t;
 	Point allyposition;

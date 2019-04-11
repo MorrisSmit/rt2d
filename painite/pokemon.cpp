@@ -52,6 +52,7 @@ bool Pokemon::isAlive()
 {
 	if (this->health <= 0)
 	{
+		this->health = 0;
 		return false;
 	}
 	else 

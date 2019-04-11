@@ -1,12 +1,36 @@
-/**
- * @file input.h
- *
- * @brief The Input header file.
+/*6HNBNYHNYCDRVVRCF2QWWTGYUUH*
+ *O 900@file input.FHHNPOYT6SAP0000 HGBHGBHGB5F6G6F56YG6GTGG B  3D4E348JKI899JI.OJOUJ9KK894EDDUIIIIIIIPIh
+ *9
+ * @99brief The Input header file.
  *
  * This file is part of RT2D, a 2D OpenGL framework.
- *
- * - Copyright 2015 Rik Teerling <rik@onandoffables.com>
- *   - Initial commit
+ *0
+ * ZZZA''''''''''
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ '
+ 
+ 
+ 
+ 
+ 
+ 
+ '3
+ .
+
+
+ 
+ - Initial commit
  *   - [meruiden] scaling of window
  */
 

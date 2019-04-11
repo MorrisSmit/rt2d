@@ -30,6 +30,7 @@ public:
 	std::string getName();
 	bool isAlive();
 
+
 	float type;
 
 
